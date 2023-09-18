@@ -9,7 +9,7 @@
         chosen-class="chosenClass"
         :sort="false"
         item-key="name"
-        @start="checkMove"
+        :move="checkMove"
       >
         <template #item="{ element }">
           <figure class="photo w-1/3">
