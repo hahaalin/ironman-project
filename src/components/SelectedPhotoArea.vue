@@ -17,10 +17,7 @@
         </template>
 
         <template #item="{ element, index }">
-          <figure
-            class="photo w-1/3"
-            @click.stop="$emit('openLightBox', index)"
-          >
+          <figure class="photo w-1/3">
             <div
               class="iconImg delete"
               @click="$emit('inactiveImage', element)"
@@ -30,6 +27,7 @@
             <img
               :src="element.file"
               class="object-cover w-full h-full"
+              @click.stop="$emit('openLightBox', index)"
               alt=""
             />
             <p class="bg-amber-300 absolute bottom-0 left-2 p-2">
