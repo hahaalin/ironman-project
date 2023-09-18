@@ -9,7 +9,14 @@
     <selectedPhotoArea
       :displayList="displayList"
       @inactiveImage="inactiveImage"
+      @openLightBox="openLightBox"
     />
+    <vue-easy-lightbox
+      :visible="visibleRef"
+      :imgs="imgsRef"
+      :index="indexRef"
+      @hide="onHide"
+    ></vue-easy-lightbox>
   </div>
 </template>
 
@@ -17,6 +24,7 @@
 import { ref, reactive, computed } from 'vue';
 import selectedPhotoArea from '../components/SelectedPhotoArea.vue';
 import photoArea from '../components/PhotoArea.vue';
+import VueEasyLightbox from 'vue-easy-lightbox';
 
 const state = reactive({
   list: [
@@ -64,6 +72,19 @@ const checkMove = draggedElement => {
     //加入成功的需改變is_active
     draggedElement.is_active = true;
   }
+};
+
+const visibleRef = ref(false);
+const indexRef = ref(0); // default 0
+const imgsRef = ref([]);
+const onShow = () => {
+  visibleRef.value = true;
+};
+const onHide = () => (visibleRef.value = false);
+const openLightBox = index => {
+  imgsRef.value = displayList.value.map(photos => photos.file);
+  indexRef.value = index;
+  onShow();
 };
 </script>
 

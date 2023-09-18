@@ -14,14 +14,14 @@
         <template #item="{ element }">
           <figure class="photo w-1/3">
             <div
-              class="icon checked"
+              class="iconImg checked"
               v-if="element.is_active"
               @click="$emit('inactiveImage', element)"
             >
               <img src="/src/assets/icon/check.png" width="32" height="32" />
             </div>
             <div
-              class="icon unChecked"
+              class="iconImg unChecked"
               v-else
               @click="$emit('activeImage', element)"
             >

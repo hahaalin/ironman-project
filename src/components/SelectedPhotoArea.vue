@@ -17,8 +17,14 @@
         </template>
 
         <template #item="{ element, index }">
-          <figure class="photo w-1/3">
-            <div class="icon delete" @click="$emit('inactiveImage', element)">
+          <figure
+            class="photo w-1/3"
+            @click.stop="$emit('openLightBox', index)"
+          >
+            <div
+              class="iconImg delete"
+              @click="$emit('inactiveImage', element)"
+            >
               <img src="/src/assets/icon/remove.png" width="32" height="32" />
             </div>
             <img
@@ -41,7 +47,7 @@ import draggable from 'vuedraggable';
 defineProps({
   displayList: Array
 });
-defineEmits(['inactiveImage']);
+defineEmits(['inactiveImage', 'openLightBox']);
 </script>
 
 <style lang="scss" scoped></style>

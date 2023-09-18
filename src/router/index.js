@@ -9,6 +9,12 @@ const routes = [
     path: '/simple',
     name: 'Simple',
     component: () => import('../views/Simple.vue')
+  },
+  ,
+  {
+    path: '/lightbox',
+    name: 'Ligntbox',
+    component: () => import('../views/Lightbox.vue')
   }
 ];
 
