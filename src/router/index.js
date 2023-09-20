@@ -15,6 +15,11 @@ const routes = [
     path: '/lightbox',
     name: 'Ligntbox',
     component: () => import('../views/Lightbox.vue')
+  },
+  {
+    path: '/vueFinalModal',
+    name: 'VueFinalModal',
+    component: () => import('../views/VueFinalModal.vue')
   }
 ];
 
