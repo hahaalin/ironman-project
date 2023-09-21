@@ -20,6 +20,11 @@ const routes = [
     path: '/vueFinalModal',
     name: 'VueFinalModal',
     component: () => import('../views/VueFinalModal.vue')
+  },
+  {
+    path: '/windowResize',
+    name: 'WindowResize',
+    component: () => import('../views/WindowResize.vue')
   }
 ];
 
