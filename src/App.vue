@@ -6,7 +6,8 @@
     <router-link to="/simple">Simple</router-link>|
     <router-link to="/lightbox">v-easy-lightbox</router-link>|
     <router-link to="/vueFinalModal">vueFinalModal</router-link>|
-    <router-link to="/windowResize">windowResize</router-link>
+    <router-link to="/windowResize">windowResize</router-link>|
+    <router-link to="/resizeObserver">resizeObserver</router-link>
   </nav>
   <router-view />
 </template>

@@ -25,6 +25,11 @@ const routes = [
     path: '/windowResize',
     name: 'WindowResize',
     component: () => import('../views/WindowResize.vue')
+  },
+  {
+    path: '/resizeObserver',
+    name: 'ResizeObserver',
+    component: () => import('../views/ResizeObserver.vue')
   }
 ];
 
