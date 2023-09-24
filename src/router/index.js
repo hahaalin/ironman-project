@@ -30,6 +30,11 @@ const routes = [
     path: '/resizeObserver',
     name: 'ResizeObserver',
     component: () => import('../views/ResizeObserver.vue')
+  },
+  {
+    path: '/vueEllipsis',
+    name: 'VueEllipsis',
+    component: () => import('../views/VueEllipsis.vue')
   }
 ];
 
