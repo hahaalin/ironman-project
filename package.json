@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@vueuse/core": "^10.4.1",
+    "resize-textarea-vue3": "^1.1.3",
     "vue": "^3.3.4",
     "vue-easy-lightbox": "^1.16.0",
     "vue-ellipsis-3": "^0.0.6",

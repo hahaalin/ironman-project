@@ -8,7 +8,8 @@
     <router-link to="/vueFinalModal">vueFinalModal</router-link>|
     <router-link to="/windowResize">windowResize</router-link>|
     <router-link to="/resizeObserver">resizeObserver</router-link>|
-    <router-link to="/vueEllipsis">vueEllipsis</router-link>
+    <router-link to="/vueEllipsis">vueEllipsis</router-link>|
+    <router-link to="/resizeTextarea">resizeTextarea</router-link>
   </nav>
   <router-view />
 </template>

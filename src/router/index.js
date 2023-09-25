@@ -35,6 +35,11 @@ const routes = [
     path: '/vueEllipsis',
     name: 'VueEllipsis',
     component: () => import('../views/VueEllipsis.vue')
+  },
+  {
+    path: '/resizeTextarea',
+    name: 'ResizeTextarea',
+    component: () => import('../views/ResizeTextarea.vue')
   }
 ];
 
