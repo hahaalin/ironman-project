@@ -40,6 +40,11 @@ const routes = [
     path: '/resizeTextarea',
     name: 'ResizeTextarea',
     component: () => import('../views/ResizeTextarea.vue')
+  },
+  {
+    path: '/textToSpeech',
+    name: 'TextToSpeech',
+    component: () => import('../views/TextToSpeech.vue')
   }
 ];
 
