@@ -10,7 +10,8 @@
     <router-link to="/resizeObserver">resizeObserver</router-link>|
     <router-link to="/vueEllipsis">vueEllipsis</router-link>|
     <router-link to="/resizeTextarea">resizeTextarea</router-link>|
-    <router-link to="/textToSpeech">TextToSpeech</router-link>
+    <router-link to="/textToSpeech">TextToSpeech</router-link>|
+    <router-link to="/speechToText">SpeechRecognition</router-link>
   </nav>
   <router-view />
 </template>

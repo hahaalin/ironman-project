@@ -45,6 +45,11 @@ const routes = [
     path: '/textToSpeech',
     name: 'TextToSpeech',
     component: () => import('../views/TextToSpeech.vue')
+  },
+  {
+    path: '/speechToText',
+    name: 'SpeechToText',
+    component: () => import('../views/SpeechRecognition.vue')
   }
 ];
 
