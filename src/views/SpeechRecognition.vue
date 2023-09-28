@@ -2,7 +2,9 @@
   <div class="container">
     <h1>Speech color changer</h1>
     <div class="hints">
-      <p class="mb-4">點擊後按鈕後，請嘗試說出一種顏色以更改網頁的背景顏色。</p>
+      <p class="mb-4">
+        點擊按鈕後，請嘗試說出一種以下列表顏色的英文，若語音判斷正確，網頁的背景顏色則會變色。
+      </p>
 
       <div class="flex items-center gap-4 mb-8">
         <button
@@ -44,56 +46,7 @@
 
 <script setup>
 import { ref, onMounted } from 'vue';
-
-const colors = [
-  'aqua',
-  'azure',
-  'beige',
-  'bisque',
-  'black',
-  'blue',
-  'brown',
-  'chocolate',
-  'coral',
-  'crimson',
-  'cyan',
-  'fuchsia',
-  'ghostwhite',
-  'gold',
-  'goldenrod',
-  'gray',
-  'green',
-  'indigo',
-  'ivory',
-  'khaki',
-  'lavender',
-  'lime',
-  'linen',
-  'magenta',
-  'maroon',
-  'moccasin',
-  'navy',
-  'olive',
-  'orange',
-  'orchid',
-  'peru',
-  'pink',
-  'plum',
-  'purple',
-  'red',
-  'salmon',
-  'sienna',
-  'silver',
-  'snow',
-  'tan',
-  'teal',
-  'thistle',
-  'tomato',
-  'turquoise',
-  'violet',
-  'white',
-  'yellow'
-];
+import { colors } from '../lib/colors.js';
 
 const diagnosticMessage = ref('辨識的結果：');
 let recognition = null;
