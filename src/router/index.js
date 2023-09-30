@@ -50,6 +50,11 @@ const routes = [
     path: '/speechToText',
     name: 'SpeechToText',
     component: () => import('../views/SpeechRecognition.vue')
+  },
+  {
+    path: '/compressorImg',
+    name: 'CompressorImg',
+    component: () => import('../views/CompressorImg.vue')
   }
 ];
 
