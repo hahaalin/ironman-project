@@ -17,6 +17,7 @@
     "vue-ellipsis-3": "^0.0.6",
     "vue-final-modal": "^4.4.5",
     "vue-router": "^4.2.4",
+    "vue3-toastify": "^0.1.13",
     "vuedraggable": "^4.1.0"
   },
   "devDependencies": {

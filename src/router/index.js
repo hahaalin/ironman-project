@@ -55,6 +55,11 @@ const routes = [
     path: '/compressorImg',
     name: 'CompressorImg',
     component: () => import('../views/CompressorImg.vue')
+  },
+  {
+    path: '/toastify',
+    name: 'Toastify',
+    component: () => import('../views/Toastify.vue')
   }
 ];
 
