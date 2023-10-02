@@ -60,6 +60,11 @@ const routes = [
     path: '/toastify',
     name: 'Toastify',
     component: () => import('../views/Toastify.vue')
+  },
+  {
+    path: '/intersectionObserverImg',
+    name: 'IntersectionObserverImg',
+    component: () => import('../views/IntersectionObserverImg.vue')
   }
 ];
 
