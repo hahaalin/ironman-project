@@ -15,7 +15,7 @@
             class="hover:border-green-600"
             @click="asideOpen = !asideOpen"
           >
-            <img src="src/assets/icon/menu.png" alt="" width="20" />
+            <img src="/src/assets/icon/menu.png" alt="" width="20" />
           </button>
         </div>
       </div>

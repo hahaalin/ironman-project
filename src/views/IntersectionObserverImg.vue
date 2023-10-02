@@ -6,7 +6,7 @@
     <div class="image-container mt-8">
       <img
         v-for="(image, index) in images"
-        src="src/assets/icon/loading-bar.png"
+        src="/src/assets/icon/loading-bar.png"
         :key="image.id"
         :data-src="image.src"
         :alt="image.alt"
