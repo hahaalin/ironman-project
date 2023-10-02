@@ -60,7 +60,7 @@ const itemRef = index => el => {
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
 img {
   display: block;
   margin: 1em 0;
