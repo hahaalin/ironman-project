@@ -27,21 +27,9 @@
         class="flex w-72 flex-col space-y-2 border-r-2 border-gray-100 bg-white p-2"
         v-show="asideOpen"
       >
-        <router-link to="/">PhotoDraggable</router-link>
-        <router-link to="/simple">Simple</router-link>
-        <router-link to="/lightbox">v-easy-lightbox</router-link>
-        <router-link to="/vueFinalModal">vueFinalModal</router-link>
-        <router-link to="/windowResize">windowResize</router-link>
-        <router-link to="/resizeObserver">resizeObserver</router-link>
-        <router-link to="/vueEllipsis">vueEllipsis</router-link>
-        <router-link to="/resizeTextarea">resizeTextarea</router-link>
-        <router-link to="/textToSpeech">TextToSpeech</router-link>
-        <router-link to="/speechToText">SpeechRecognition</router-link>
-        <router-link to="/compressorImg">CompressorImg</router-link>
-        <router-link to="/toastify">Toastify</router-link>
-        <router-link to="/intersectionObserverImg"
-          >IntersectionObserverImg</router-link
-        >
+        <router-link v-for="link in links" :key="link.to" :to="link.to">
+          {{ link.text }}
+        </router-link>
       </aside>
 
       <!-- main content page -->
@@ -55,6 +43,22 @@
 import { ref } from 'vue';
 
 const asideOpen = ref(true);
+
+const links = ref([
+  { text: 'PhotoDraggable', to: '/' },
+  { text: 'v-easy-lightbox', to: '/lightbox' },
+  { text: 'vueFinalModal', to: '/vueFinalModal' },
+  { text: 'windowResize', to: '/windowResize' },
+  { text: 'resizeObserver', to: '/resizeObserver' },
+  { text: 'vueEllipsis', to: '/vueEllipsis' },
+  { text: 'resizeTextarea', to: '/resizeTextarea' },
+  { text: 'TextToSpeech', to: '/textToSpeech' },
+  { text: 'speechToText', to: '/speechToText' },
+  { text: 'CompressorImg', to: '/CompressorImg' },
+  { text: 'toastify', to: '/Toastify' },
+  { text: 'intersectionObserverImg', to: '/intersectionObserverImg' },
+  { text: 'AsyncComponent', to: '/asyncComponent' }
+]);
 </script>
 
 <style scoped>

@@ -65,6 +65,11 @@ const routes = [
     path: '/intersectionObserverImg',
     name: 'IntersectionObserverImg',
     component: () => import('../views/IntersectionObserverImg.vue')
+  },
+  {
+    path: '/asyncComponent',
+    name: 'AsyncComponent',
+    component: () => import('../views/AsyncComponent.vue')
   }
 ];
 
