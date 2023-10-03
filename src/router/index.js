@@ -70,6 +70,11 @@ const routes = [
     path: '/asyncComponent',
     name: 'AsyncComponent',
     component: () => import('../views/AsyncComponent.vue')
+  },
+  {
+    path: '/intersectionObserverComponent',
+    name: 'IntersectionObserverComponent',
+    component: () => import('../views/IntersectionObserverComponent.vue')
   }
 ];
 

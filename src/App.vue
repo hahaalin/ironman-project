@@ -57,7 +57,11 @@ const links = ref([
   { text: 'CompressorImg', to: '/CompressorImg' },
   { text: 'toastify', to: '/Toastify' },
   { text: 'intersectionObserverImg', to: '/intersectionObserverImg' },
-  { text: 'AsyncComponent', to: '/asyncComponent' }
+  { text: 'AsyncComponent', to: '/asyncComponent' },
+  {
+    text: 'intersectionObserverComponent',
+    to: '/intersectionObserverComponent'
+  }
 ]);
 </script>
 
