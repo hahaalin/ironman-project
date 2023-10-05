@@ -75,6 +75,11 @@ const routes = [
     path: '/intersectionObserverComponent',
     name: 'IntersectionObserverComponent',
     component: () => import('../views/IntersectionObserverComponent.vue')
+  },
+  {
+    path: '/onboarding',
+    name: 'Onboarding',
+    component: () => import('../views/Onboarding.vue')
   }
 ];
 
