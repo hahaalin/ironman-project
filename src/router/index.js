@@ -85,6 +85,11 @@ const routes = [
     path: '/vmemo',
     name: 'Vmemo',
     component: () => import('../views/Vmemo.vue')
+  },
+  {
+    path: '/useMemoize',
+    name: 'UseMemoize',
+    component: () => import('../views/UseMemoize.vue')
   }
 ];
 

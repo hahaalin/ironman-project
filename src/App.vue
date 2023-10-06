@@ -69,6 +69,10 @@ const links = ref([
   {
     text: 'Vmemo',
     to: '/vmemo'
+  },
+  {
+    text: 'UseMemoize',
+    to: '/useMemoize'
   }
 ]);
 </script>
