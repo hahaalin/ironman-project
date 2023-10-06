@@ -80,6 +80,11 @@ const routes = [
     path: '/onboarding',
     name: 'Onboarding',
     component: () => import('../views/Onboarding.vue')
+  },
+  {
+    path: '/vmemo',
+    name: 'Vmemo',
+    component: () => import('../views/Vmemo.vue')
   }
 ];
 
