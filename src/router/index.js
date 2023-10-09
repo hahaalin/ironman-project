@@ -1,4 +1,5 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 const routes = [
   {
     path: '/',
@@ -90,6 +91,22 @@ const routes = [
     path: '/useMemoize',
     name: 'UseMemoize',
     component: () => import('../views/UseMemoize.vue')
+  },
+  {
+    path: '/signUp',
+    name: 'SignUp',
+    component: () => import('../views/SignUp.vue')
+  },
+  {
+    path: '/signIn',
+    name: 'SignIn',
+    component: () => import('../views/SignIn.vue')
+  },
+  {
+    path: '/successSign',
+    name: 'SuccessSign',
+    component: () => import('../views/SuccessSign.vue'),
+    meta: { requiresAuth: true }
   }
 ];
 
@@ -97,6 +114,28 @@ const routes = [
 const router = createRouter({
   history: createWebHashHistory(),
   routes
+});
+
+const getCurrentUser = () => {
+  return new Promise((resolve, reject) => {
+    const removeListener = onAuthStateChanged(
+      getAuth(),
+      user => {
+        removeListener();
+        resolve(user);
+      },
+      reject
+    );
+  });
+};
+
+router.beforeEach(async (to, from) => {
+  if (to.meta.requiresAuth && !(await getCurrentUser())) {
+    return {
+      path: '/signIn',
+      query: { redirect: to.fullPath }
+    };
+  }
 });
 
 export default router;

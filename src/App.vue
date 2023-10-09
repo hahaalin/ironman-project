@@ -9,14 +9,38 @@
             <img src="/vite.svg" alt="" />
             <h1 class="text-sm font-bold" id="demo">範例Demo</h1>
           </div>
-
-          <button
-            type="button"
-            class="hover:border-green-600"
-            @click="asideOpen = !asideOpen"
-          >
-            <img src="/src/assets/icon/menu.png" alt="" width="20" />
-          </button>
+          <div class="flex items-center">
+            <button
+              type="button"
+              class="bg-yellow-500 text-white p-2"
+              @click="goToSignIn"
+              v-if="!isLoggedIn"
+            >
+              登入
+            </button>
+            <button
+              type="button"
+              class="bg-yellow-500 text-white p-2"
+              @click="handleSignOut"
+              v-if="isLoggedIn"
+            >
+              登出
+            </button>
+            <button
+              type="button"
+              class="bg-purple-500 text-white p-2"
+              @click="goToSignUP"
+            >
+              註冊
+            </button>
+            <button
+              type="button"
+              class="hover:border-green-600"
+              @click="asideOpen = !asideOpen"
+            >
+              <img src="/src/assets/icon/menu.png" alt="" width="20" />
+            </button>
+          </div>
         </div>
       </div>
     </header>
@@ -40,8 +64,11 @@
   </main>
 </template>
 <script setup>
-import { ref } from 'vue';
-
+import { onMounted, ref } from 'vue';
+import { useRouter } from 'vue-router';
+import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
+const auth = getAuth();
+const router = useRouter();
 const asideOpen = ref(true);
 
 const links = ref([
@@ -73,8 +100,38 @@ const links = ref([
   {
     text: 'UseMemoize',
     to: '/useMemoize'
+  },
+  {
+    text: 'SuccessSign',
+    to: '/successSign'
   }
 ]);
+
+const goToSignUP = () => {
+  router.push('/signUp');
+};
+const goToSignIn = () => {
+  router.push('/signIn');
+};
+
+const isLoggedIn = ref(false);
+const handleSignOut = () => {
+  signOut(auth)
+    .then(() => {
+      console.log('已登出');
+      isLoggedIn.value = false;
+      router.push('/');
+    })
+    .catch(error => {
+      console.log('登出失敗', error);
+    });
+};
+
+onMounted(() => {
+  onAuthStateChanged(auth, user => {
+    user ? (isLoggedIn.value = true) : (isLoggedIn.value = false);
+  });
+});
 </script>
 
 <style scoped>
