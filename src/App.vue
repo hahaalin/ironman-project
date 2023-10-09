@@ -7,7 +7,7 @@
         <div class="flex items-center space-x-2 justify-between">
           <div class="flex justify-center items-center">
             <img src="/vite.svg" alt="" />
-            <h1 class="text-sm font-bold" id="demo">範例Demo</h1>
+            <h1 class="text-sm font-bold" id="demo">範例Demo(dev)</h1>
           </div>
 
           <button
