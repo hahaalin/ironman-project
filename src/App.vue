@@ -104,6 +104,10 @@ const links = ref([
   {
     text: 'SuccessSign',
     to: '/successSign'
+  },
+  {
+    text: 'CRUD',
+    to: '/CRUD'
   }
 ]);
 

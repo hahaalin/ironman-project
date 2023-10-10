@@ -107,6 +107,11 @@ const routes = [
     name: 'SuccessSign',
     component: () => import('../views/SuccessSign.vue'),
     meta: { requiresAuth: true }
+  },
+  {
+    path: '/CRUD',
+    name: 'CRUD',
+    component: () => import('../views/CRUD.vue')
   }
 ];
 
