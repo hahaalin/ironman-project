@@ -112,6 +112,11 @@ const routes = [
     path: '/CRUD',
     name: 'CRUD',
     component: () => import('../views/CRUD.vue')
+  },
+  {
+    path: '/uploadToFirebase',
+    name: 'UploadToFirebase',
+    component: () => import('../views/UploadToFirebase.vue')
   }
 ];
 

@@ -108,6 +108,10 @@ const links = ref([
   {
     text: 'CRUD',
     to: '/CRUD'
+  },
+  {
+    text: 'UploadToFirebase',
+    to: '/uploadToFirebase'
   }
 ]);
 
