@@ -87,32 +87,36 @@ const links = ref([
   { text: 'AsyncComponent', to: '/asyncComponent' },
   {
     text: 'intersectionObserverComponent',
-    to: '/intersectionObserverComponent'
+    to: '/intersectionObserverComponent',
   },
   {
     text: 'Onboarding',
-    to: '/onboarding'
+    to: '/onboarding',
   },
   {
     text: 'Vmemo',
-    to: '/vmemo'
+    to: '/vmemo',
   },
   {
     text: 'UseMemoize',
-    to: '/useMemoize'
+    to: '/useMemoize',
   },
   {
     text: 'SuccessSign',
-    to: '/successSign'
+    to: '/successSign',
   },
   {
     text: 'CRUD',
-    to: '/CRUD'
+    to: '/CRUD',
   },
   {
     text: 'UploadToFirebase',
-    to: '/uploadToFirebase'
-  }
+    to: '/uploadToFirebase',
+  },
+  {
+    text: 'chatRoom',
+    to: '/chatRoom',
+  },
 ]);
 
 const goToSignUP = () => {
@@ -130,13 +134,13 @@ const handleSignOut = () => {
       isLoggedIn.value = false;
       router.push('/');
     })
-    .catch(error => {
+    .catch((error) => {
       console.log('登出失敗', error);
     });
 };
 
 onMounted(() => {
-  onAuthStateChanged(auth, user => {
+  onAuthStateChanged(auth, (user) => {
     user ? (isLoggedIn.value = true) : (isLoggedIn.value = false);
   });
 });

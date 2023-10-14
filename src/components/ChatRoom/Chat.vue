@@ -1,0 +1,194 @@
+<template>
+  <div class="container">
+    <div class="flex p-2 sticky bottom-0 bg-gray-200">
+      <input
+        type="file"
+        ref="fileInput"
+        accept="image/*"
+        @change="handleFileSelect"
+      />
+      <input
+        type="text"
+        class="boder p-1 flex-1"
+        v-model.trim="message"
+        @keyup.enter="addMessage"
+        placeholder="輸入訊息"
+      />
+      <button
+        class="boder p-2 bg-green-400 text-white"
+        type="button"
+        @click="addMessage"
+      >
+        送出
+      </button>
+    </div>
+
+    <div v-if="isLoading" class="mt-6">Loading...</div>
+
+    <div class="overflow-auto max-h-[1000px] mt-6" v-else>
+      <div
+        class="flex mb-3 gap-2"
+        v-for="(item, key) in chatroom"
+        :key="key"
+        :class="{
+          'flex-row-reverse': item.username === username,
+        }"
+      >
+        <div class="avatar mt-1" v-if="item.username !== username">
+          <span> {{ item.username.slice(0, 1) }}</span>
+        </div>
+
+        <div class="max-w-2/3">
+          <div class="text-right">
+            <small class="text-gray-500 ml-2">
+              {{ new Date(item.time).toLocaleDateString() }}
+              {{ new Date(item.time).toLocaleTimeString() }}</small
+            >
+          </div>
+          <div
+            class="p-2 mt-2 rounded-lg"
+            :class="{
+              'bg-blue-500 text-white': item.username === username,
+              'bg-gray-100': item.username !== username,
+            }"
+          >
+            <p v-if="item.type === 'text'">{{ item.message }}</p>
+            <img
+              v-else-if="item.type === 'image'"
+              :src="item.message"
+              alt="Image"
+              class="max-w-[150px]"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script setup>
+import { db } from '@/services/firebase.js';
+import { storage } from '@/services/firebase.js';
+import {
+  ref as storageRef,
+  uploadBytesResumable,
+  getDownloadURL,
+} from 'firebase/storage';
+import {
+  collection,
+  addDoc,
+  onSnapshot,
+  orderBy,
+  query,
+  updateDoc,
+  doc,
+  deleteDoc,
+} from 'firebase/firestore';
+import { onMounted, onUnmounted, ref } from 'vue';
+const props = defineProps({
+  username: String,
+});
+const isLoading = ref(true);
+const message = ref('');
+const chatroom = ref([]);
+const uploadProgress = ref(null);
+const fileInput = ref(null);
+let unsubscribe;
+
+const addMessage = async () => {
+  if (!message) {
+    return;
+  }
+  try {
+    const docRef = await addDoc(collection(db, 'messages'), {
+      message: message.value,
+      username: props.username,
+      time: Date.now(),
+      type: 'text',
+    });
+  } catch (e) {
+    console.error('Error adding document: ', e);
+  } finally {
+    message.value = '';
+  }
+};
+
+const handleFileSelect = (event) => {
+  const file = event.target.files[0]; // 抓取file
+
+  if (file && file.size > 2 * 1024 * 1024) {
+    alert('文件大小超過2MB，請重新上傳');
+    fileInput.value.value = '';
+    return;
+  }
+  uploadImage(file);
+};
+
+const uploadImage = async (file) => {
+  const storageName = storageRef(storage, `images/${file.name}`);
+
+  const uploadTask = uploadBytesResumable(storageName, file);
+
+  uploadTask.on(
+    'state_changed',
+    (snapshot) => {
+      const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+      uploadProgress.value = parseInt(progress);
+    },
+    (error) => {
+      console.error('Upload failed:', error);
+    },
+    async () => {
+      const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+      // 將 downloadURL 存到 Firestore 的訊息中
+      uploadProgress.value = null;
+      fileInput.value.value = '';
+      await addDoc(collection(db, 'messages'), {
+        message: downloadURL,
+        username: props.username,
+        time: Date.now(),
+        type: 'image',
+      });
+    }
+  );
+};
+
+onMounted(async () => {
+  const lastestQuery = query(collection(db, 'messages'), orderBy('time'));
+
+  unsubscribe = onSnapshot(
+    lastestQuery,
+    (snapshot) => {
+      chatroom.value = snapshot.docs.map((doc) => {
+        return {
+          id: doc.id,
+          ...doc.data(),
+        };
+      });
+      isLoading.value = false;
+    },
+    (error) => {
+      console.error('Error getting documents: ', error);
+    }
+  );
+});
+onUnmounted(() => {
+  if (unsubscribe) {
+    unsubscribe();
+  }
+});
+</script>
+
+<style lang="scss" scoped>
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #eee;
+  border: 1px solid;
+  display: flex;
+  justify-content: center;
+  font-size: 20px;
+  color: #999;
+}
+</style>
