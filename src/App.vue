@@ -1,7 +1,10 @@
 <template>
-  <main class="w-full text-gray-700" x-data="layout">
+  <main
+    class="w-full text-gray-700 flex flex-col h-screen min-h-0"
+    x-data="layout"
+  >
     <header
-      class="flex w-full items-center justify-between border-b-2 border-gray-200 bg-white p-2"
+      class="h-[60px] flex w-full items-center justify-between border-b-2 border-gray-200 bg-white p-2"
     >
       <div class="container px-4">
         <div class="flex items-center space-x-2 justify-between">
@@ -45,10 +48,10 @@
       </div>
     </header>
 
-    <div class="container flex min-h-screen">
+    <div class="container flex h-[calc(100%_-_60px)]">
       <!-- aside -->
       <aside
-        class="flex w-72 flex-col space-y-2 border-r-2 border-gray-100 bg-white p-2"
+        class="flex w-72 break-all flex-col space-y-2 border-r-2 border-gray-100 bg-white p-2 h-full overflow-auto"
         v-show="asideOpen"
       >
         <router-link v-for="link in links" :key="link.to" :to="link.to">
@@ -57,19 +60,20 @@
       </aside>
 
       <!-- main content page -->
-      <div class="w-full p-4">
+      <div class="w-full p-4 h-full overflow-auto" ref="content">
         <router-view />
       </div>
     </div>
   </main>
 </template>
 <script setup>
-import { onMounted, ref } from 'vue';
+import { onMounted, ref, provide } from 'vue';
 import { useRouter } from 'vue-router';
 import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
 const auth = getAuth();
 const router = useRouter();
 const asideOpen = ref(true);
+const content = ref(null);
 
 const links = ref([
   { text: 'PhotoDraggable', to: '/' },
@@ -138,6 +142,13 @@ const handleSignOut = () => {
       console.log('登出失敗', error);
     });
 };
+const scrollTo = () => {
+  content.value.scrollTo({
+    top: content.value.scrollHeight,
+    behavior: 'smooth',
+  });
+};
+provide('scrollTo', scrollTo);
 
 onMounted(() => {
   onAuthStateChanged(auth, (user) => {

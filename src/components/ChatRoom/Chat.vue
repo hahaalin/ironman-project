@@ -1,11 +1,16 @@
 <template>
-  <div class="container">
-    <div class="flex p-2 sticky bottom-0 bg-gray-200">
+  <div class="container min-h-screen relative" ref="messageContent">
+    <div class="flex flex-wrap items-center p-2 sticky top-0 bg-gray-200">
+      <label for="fileInput">
+        <img src="src/assets/icon/attach-file.png" alt="" />
+      </label>
       <input
         type="file"
         ref="fileInput"
+        id="fileInput"
         accept="image/*"
         @change="handleFileSelect"
+        class="hidden"
       />
       <input
         type="text"
@@ -21,11 +26,17 @@
       >
         送出
       </button>
+      <div v-if="uploadProgress !== null" class="w-full">
+        <progress :value="uploadProgress" max="100" class="w-[90%]">
+          {{ uploadProgress }}%
+        </progress>
+        {{ uploadProgress }}%
+      </div>
     </div>
 
     <div v-if="isLoading" class="mt-6">Loading...</div>
 
-    <div class="overflow-auto max-h-[1000px] mt-6" v-else>
+    <div class="mt-6" v-else>
       <div
         class="flex mb-3 gap-2"
         v-for="(item, key) in chatroom"
@@ -53,6 +64,7 @@
             }"
           >
             <p v-if="item.type === 'text'">{{ item.message }}</p>
+
             <img
               v-else-if="item.type === 'image'"
               :src="item.message"
@@ -84,15 +96,17 @@ import {
   doc,
   deleteDoc,
 } from 'firebase/firestore';
-import { onMounted, onUnmounted, ref } from 'vue';
+import { onMounted, onUnmounted, ref, inject, nextTick } from 'vue';
 const props = defineProps({
   username: String,
 });
 const isLoading = ref(true);
+const messageContent = ref(null);
+const fileInput = ref(null);
 const message = ref('');
 const chatroom = ref([]);
 const uploadProgress = ref(null);
-const fileInput = ref(null);
+const scrollTo = inject('scrollTo');
 let unsubscribe;
 
 const addMessage = async () => {
@@ -110,6 +124,7 @@ const addMessage = async () => {
     console.error('Error adding document: ', e);
   } finally {
     message.value = '';
+    scrollTo();
   }
 };
 
@@ -149,6 +164,8 @@ const uploadImage = async (file) => {
         time: Date.now(),
         type: 'image',
       });
+      await nextTick();
+      scrollTo();
     }
   );
 };
