@@ -2,7 +2,7 @@
   <div class="container min-h-screen relative" ref="messageContent">
     <div class="flex flex-wrap items-center p-2 sticky top-0 bg-gray-200">
       <label for="fileInput">
-        <img src="src/assets/icon/attach-file.png" alt="" />
+        <img src="/src/assets/icon/attach-file.png" alt="" />
       </label>
       <input
         type="file"
