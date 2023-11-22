@@ -85,42 +85,43 @@ const links = ref([
   { text: 'resizeTextarea', to: '/resizeTextarea' },
   { text: 'TextToSpeech', to: '/textToSpeech' },
   { text: 'speechToText', to: '/speechToText' },
+  { text: 'ImgToText', to: '/imgToText' },
   { text: 'CompressorImg', to: '/CompressorImg' },
   { text: 'toastify', to: '/Toastify' },
   { text: 'intersectionObserverImg', to: '/intersectionObserverImg' },
   { text: 'AsyncComponent', to: '/asyncComponent' },
   {
     text: 'intersectionObserverComponent',
-    to: '/intersectionObserverComponent',
+    to: '/intersectionObserverComponent'
   },
   {
     text: 'Onboarding',
-    to: '/onboarding',
+    to: '/onboarding'
   },
   {
     text: 'Vmemo',
-    to: '/vmemo',
+    to: '/vmemo'
   },
   {
     text: 'UseMemoize',
-    to: '/useMemoize',
+    to: '/useMemoize'
   },
   {
     text: 'SuccessSign',
-    to: '/successSign',
+    to: '/successSign'
   },
   {
     text: 'CRUD',
-    to: '/CRUD',
+    to: '/CRUD'
   },
   {
     text: 'UploadToFirebase',
-    to: '/uploadToFirebase',
+    to: '/uploadToFirebase'
   },
   {
     text: 'chatRoom',
-    to: '/chatRoom',
-  },
+    to: '/chatRoom'
+  }
 ]);
 
 const goToSignUP = () => {
@@ -138,20 +139,20 @@ const handleSignOut = () => {
       isLoggedIn.value = false;
       router.push('/');
     })
-    .catch((error) => {
+    .catch(error => {
       console.log('登出失敗', error);
     });
 };
 const scrollTo = () => {
   content.value.scrollTo({
     top: content.value.scrollHeight,
-    behavior: 'smooth',
+    behavior: 'smooth'
   });
 };
 provide('scrollTo', scrollTo);
 
 onMounted(() => {
-  onAuthStateChanged(auth, (user) => {
+  onAuthStateChanged(auth, user => {
     user ? (isLoggedIn.value = true) : (isLoggedIn.value = false);
   });
 });
